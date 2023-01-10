@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<body>
+    <div class="container">
+        <header class="blog-header lh-1 py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+            </div>
+            <div class="col-4 text-center">
+            <a class="blog-header-logo text-dark" href="/main">NEED CONNECT</a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <div id="noLogin" style="display: none;">
+                    <a class="btn btn-sm btn-outline-secondary" href="/login">로그인</a>
+                    <a class="btn btn-sm btn-outline-secondary" style="margin-left: 10px;" href="/signup">회원가입</a>
+                </div>
+                <div id="yesLogin" style="display: none;">
+                    <a id="logout" class="btn btn-sm btn-outline-secondary" href="#">로그아웃</a>
+                </div>
+            </div>
+        </div>
+        </header>
+
+        <div class="blog-header py-1 mb-2">
+        <nav class="nav d-flex justify-content-between" style="padding: 0 30px 0 30px;">
+            <a class="p-2 link-secondary" href="/board">게시판</a>
+            <a class="p-2 link-secondary" href="/survey">적성검사</a>
+            <a class="p-2 link-secondary" href="https://www.jinhakapply.com/">진학사원서접수</a>
+            <a class="p-2 link-secondary" href="https://www.uwayapply.com/">유웨이어플라이</a>
+            <a class="p-2 link-secondary" href="https://www.suneung.re.kr/main.do?s=suneung">대학수학능력시험</a>
+        </nav>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('http://127.0.0.1:4500/apis/checkLogin')
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+                    let divbox = document.getElementById('yesLogin');
+
+                    let user = document.createElement("p");
+                    user.style = 'display: inline; margin-right: 10px;';
+                    user.innerHTML = response.user.nickname + "님 환영합니다!";
+                    divbox.prepend(user);
+
+                    divbox.style.display = 'block';
+                } else {
+                    document.getElementById('noLogin').style.display = 'block';
+                }
+            })
+        })
+
+        document.getElementById('logout').addEventListener("click", function() {
+            fetch('http://127.0.0.1:4500/apis/logout')
+            .then(response => response.json())
+            .then(response => {
+                if (response.success) {
+                    alert(response.message)
+                    location.reload()
+                } else {
+                    alert('로그아웃 실패.')
+                }
+            })
+        })
+    </script>
+</body>

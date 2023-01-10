@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.104.2">
+        <title>OSSP_Team_23</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/blog/">
+        <link href="/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+          }
+
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+
+          .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+          }
+
+          .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+          }
+
+          .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+          }
+
+          .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+          }
+
+          .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+          }
+
+          .page-title:after {
+            content: "";
+            display: block;
+            clear: both;
+          }
+
+          .title, .writer {
+            color: black; text-decoration: none;
+          }
+
+          .title:hover, .writer:hover {
+            color: black; text-decoration: underline;
+          }
+
+          .page {
+            text-align: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 10px 0 10px 0;
+            border-radius: 10px;
+            border: #e5e5e5 .05rem solid;
+            margin-bottom: 20px;
+          }
+
+            .pagination > li > a {
+                background-color: white;
+                color: black;
+            }
+
+            .pagination > li > a:focus,
+            .pagination > li > a:hover,
+            .pagination > li > span:focus,
+            .pagination > li > span:hover {
+                color: white;
+                background-color: gray;
+                border-color: #ddd;
+            }
+
+            .pagination > .active > a {
+                color: white;
+                background-color: black !Important;
+                border: solid 1px black !Important;
+            }
+
+            .pagination > .active > a:hover {
+                background-color: black !Important;
+                border: solid 1px black;
+            }
+
+            .my-tooltip {
+            position: relative;
+            }
+
+            .my-tooltip:hover {
+                cursor: help;
+            }
+
+            .my-tooltip .my-tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+
+            opacity: 0;
+            transition: opacity 0.3s;
+            }
+
+            .my-tooltip .my-tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+            }
+
+            .my-tooltip:hover .my-tooltiptext {
+            visibility: visible;
+            opacity: 1;
+            }
+        </style>
+
+
+        <!-- Custom styles for this template -->
+        <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="/blog.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="wrap">
+            <%- include('./header') %>
+            <div class="container">
+
+                <div class="page">
+                    <div class="page-title my-3 mx-3">
+                        <h2 style="float: left; font-family: monospace; font-weight: 800;">게시판</h2>
+                        <a href="/post"><button type="button" class="btn btn-dark" style="float: right;" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top">글쓰기</button></a>
+                    </div>
+
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 10%;"></th>
+                            <th scope="col" style="width: 15%;">분야</th>
+                            <th scope="col" style="width: 50%;">제목</th>
+                            <th scope="col" style="width: 10%;">작성자</th>
+                            <th scope="col" style="width: 15%;">작성일</th>
+                        </tr>
+                        </thead>
+                        <tbody id="table-body" class="table-group-divider">
+
+                        </tbody>
+                    </table>
+
+                    <div style="display: inline-block; text-align: center; margin-top: 20px;">
+                        <ul id="pagination" class="pagination-sm"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- include('./footer') %>
+
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch('http://127.0.0.1:4500/apis/listBoard')
+                .then(response => response.json())
+                .then(response => {
+                    let total = Math.ceil(response.length / 10);
+                    let visible = 10;
+                    if (total < visible) visible = total;
+                    response.sort(function(a, b) { return b.id - a.id });
+
+                    $('#pagination').twbsPagination({
+                        totalPages: total,
+                        visiblePages: visible,
+                        prev: "이전",
+                        next: "다음",
+                        first: '«',
+                        last: '»',
+                        onPageClick: function (event, page) {
+                            $('#table-body').empty();
+                            response.slice(10 * (page - 1), 10 * page).forEach(post => {
+                                let postId = document.createElement('td'); postId.innerHTML = post.id;
+                                let postType = document.createElement('td'); postType.innerHTML = post.type;
+
+                                let postTitleLink = document.createElement('a');
+                                if (post.title.length <= 30) postTitleLink.innerHTML = post.title;
+                                else {
+                                    postTitleLink.innerHTML = post.title.slice(0,30) + "···";
+                                }
+                                postTitleLink.classList.add('title');
+                                postTitleLink.href = `/board/${post.id}`
+                                let postTitle = document.createElement('td'); postTitle.append(postTitleLink);
+
+                                let postWriter = document.createElement('td');
+                                if (post.writer.nickname.length <= 7) postWriter.innerHTML = post.writer.nickname;
+                                else {
+                                    postWriter.innerHTML = post.writer.nickname.slice(0,6) + "···";
+                                }
+                                if (post.writer.isStudent === '1') {
+                                    postWriter.classList.add('my-tooltip');
+                                    let postWriterMajor = document.createElement('span');
+                                    postWriterMajor.innerHTML = post.writer.major;
+                                    postWriterMajor.classList.add('my-tooltiptext');
+                                    postWriter.appendChild(postWriterMajor);
+                                }
+
+                                let postCreatedAt = document.createElement('td'); postCreatedAt.innerHTML = post.created_at.substr(0, 10);
+
+
+                                let tr = document.createElement('tr');
+                                tr.append(postId, postType, postTitle, postWriter, postCreatedAt);
+
+                                $('#table-body').append(tr);
+                            })
+                        }
+                    });
+                })
+            })
+        </script>
+    </body>
+</html>

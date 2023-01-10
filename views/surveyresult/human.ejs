@@ -1,0 +1,65 @@
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+	<title>human</title>
+	<style>
+		.container {
+			width: 640px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="d-flex align-items-center mb-2" style="justify-content:center; margin-top:60px">
+			<img src="human.png" width="200px">
+		</div>
+	</div>
+	<div class="container">
+		<div class="d-flex align-items-center" style="justify-content:center; font-size: 30px; background-color: #e9e9e9;border-radius: 5px;">
+			<span> 당신은 인문 계열 성향과 비슷합니다.</span>
+		</div>
+	</div>
+	<div class="container">
+		<div class="d-flex align-items-center" style=" font-size: 20px; margin-top:10px;">
+			<span><i class="bi bi-arrow-right-square-fill"></i> 인문 계열은 인간의 사상과 문화에 관해 탐구하는 학문
+			<br><br>인문 계열은 사람에 대한 이해를 목표로 합니다. 심리학, 언어학,<br>철학 등이 속합니다.
+            원론적인 깊은 연구를 목표로 한다면 인문계열을 추천합니다. 인간의 가치와 인간만이 가지고 있는 표현에 대한 <br>끝 없는 연구를 합니다.
+			</span>
+		</div>
+	</div>
+	<div class="container">
+		<div style="font-size: 25px; margin-top:10px; padding-left:10px;background-color: #e9e9e9;border-radius: 5px;"><span>비슷한 인물</span></div>
+	</div>
+	<div class="container">
+		<div class="d-flex align-items-center" style="font-size: 15px; margin-top:10px;">
+			<ul>
+				<li>소크라테스</li>
+				<li>공자</li>
+				<li>아담 스미스</li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<div class="d-flex align-items-center" style="justify-content:center; margin-top:10px;">
+			<button class="btn btn-primary" onclick="complete()" style="width: 80px;height: 40px;border-style: none;border-radius: 5px;font-size:20px;">
+				완료</button>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script>
+	function complete(){
+		location.replace('/main');
+	}
+</script>
+</body>
+
+</html>

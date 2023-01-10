@@ -1,0 +1,35 @@
+{
+  "name": "2022fall_41_oss",
+  "version": "1.0.0",
+  "description": "### Theme 10대 학생들이 미래에 대한 정보없이 꿈을 찾아야한다. 그래서 목적성 없는 공부를 하는 경우가 많다. 예를 들어, 수학이 어떻게 활용되는지 모르고 오직 문제를 풀기 위해 배운다. 그래서 10대 학생들에게 공부의 목적성이나, 좋은 마음가짐을 가르쳐 줄 수 있는 커뮤니티 사이트를 구축하는 것이 목표이다.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hhy4761/2022fall_41_OSS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hhy4761/2022fall_41_OSS/issues"
+  },
+  "homepage": "https://github.com/hhy4761/2022fall_41_OSS#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jquery": "^3.6.1",
+    "nodemon": "^2.0.20",
+    "react-scripts": "^5.0.1",
+    "sequelize": "^6.25.3",
+    "sequelize-cli": "^6.5.2",
+    "sqlite3": "^5.1.2"
+  },
+  "devDependencies": {
+    "react-error-overlay": "^6.0.9"
+  }
+}

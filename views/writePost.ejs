@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.104.2">
+        <title>OSSP_Team_23</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/blog/">
+        <link href="/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+          }
+
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+
+          .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+          }
+
+          .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+          }
+
+          .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+          }
+
+          .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+          }
+
+          .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+          }
+
+          .page-top:after {
+            content: "";
+            display: block;
+            clear: both;
+          }
+
+          .post {
+            text-align: start;
+          }
+
+          .title, .writer {
+            color: black; text-decoration: none;
+          }
+
+          .title:hover, .writer:hover {
+            color: black; text-decoration: underline;
+          }
+
+          .post-box {
+            padding: 20px;
+            margin: 0px 10px 20px 10px;
+            border: 1px gray solid;
+            border-radius: 10px;
+          }
+
+          .page {
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin: 10px 0 10px 0;
+            border-radius: 10px;
+            border: #e5e5e5 .05rem solid;
+          }
+
+          select option[disabled] {
+            display: none;
+          }
+        </style>
+
+
+        <!-- Custom styles for this template -->
+        <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="/blog.css" rel="stylesheet">
+    </head>
+    <body>
+        <div id="wrap">
+            <%- include('./header') %>
+            <div class="container">
+
+                <div class="page">
+                    <div class="page-top my-3 mx-3">
+                        <% if (isWrite) { %>
+                        <button type="button" id="post-btn" class="btn btn-dark" style="float: right; margin-left: 10px;">작성</button>
+                        <% } else { %>
+                        <button value="<%= id %>" type="button" id="put-btn" class="btn btn-dark" style="float: right; margin-left: 10px;">수정</button>
+                        <% } %>
+                        <a href="/board"><button type="button" class="btn btn-dark" style="float: right;">취소</button></a>
+                    </div>
+
+                    <div class="mx-3">
+                        <% if (isWrite) { %>
+                        <div class="post">
+                            <select id="type-form" class="form-select" style="margin-bottom: 10px;">
+                                <option value="" disabled selected>글 종류를 선택해 주세요</option>
+                                <option value="자유">자유</option>
+                                <option value="학업">학업</option>
+                                <option value="진로">진로</option>
+                            </select>
+                            <input type="text" class="form-control" id="title-form" placeholder="제목을 입력해 주세요">
+                        </div>
+                        <div style="border-bottom: 1px solid #c9c9c9; margin: 20px 0 20px 0;"></div>
+                        <div class="post" style="margin-bottom: 30px;">
+                            <textarea class="form-control" id="content-form" rows="15"></textarea>
+                        </div>
+                        <% } else { %>
+                        <div class="post">
+                            <select id="type-form" class="form-select" style="margin-bottom: 10px;">
+                                <% if (post.type === '자유') { %>
+                                    <option value="자유" selected>자유</option>
+                                    <option value="학업">학업</option>
+                                    <option value="진로">진로</option>
+                                <% } else if (post.type === '학업') { %>
+                                    <option value="자유">자유</option>
+                                    <option value="학업" selected>학업</option>
+                                    <option value="진로">진로</option>
+                                <% } else if (post.type === '진로') { %>
+                                    <option value="자유">자유</option>
+                                    <option value="학업">학업</option>
+                                    <option value="진로" selected>진로</option>
+                                <% } %>
+                            </select>
+                            <input type="text" class="form-control" id="title-form" placeholder="제목을 입력해 주세요" value="<%= post.title %>">
+                        </div>
+                        <div style="border-bottom: 1px solid #c9c9c9; margin: 20px 0 20px 0;"></div>
+                        <div class="post" style="margin-bottom: 30px;">
+                            <textarea class="form-control" id="content-form" rows="15"><%= post.content %></textarea>
+                        </div>
+                        <% } %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <%- include('./footer') %>
+
+        <script>
+            let postButton = document.getElementById('post-btn');
+            if (postButton) {
+                postButton.addEventListener("click", function() {
+                    let title = document.getElementById('title-form').value.trim();
+                    let content = document.getElementById('content-form').value.trim();
+                    let typeForm = document.getElementById('type-form');
+                    let type = typeForm.options[typeForm.selectedIndex].value.trim()
+
+                    const data = JSON.stringify({
+                        title: title,
+                        content: content,
+                        type: type
+                    })
+
+                    const p = {
+                        method: "POST",
+                        headers: {
+                            "Content-type":"application/json"
+                        },
+                        body: data
+                    }
+
+                    if (title && content && type) {
+                        fetch('/apis/postBoard', p)
+                        .then(response => response.json())
+                        .then(response => {
+                            alert(response.message)
+                            if (response.success) {
+                                location.href = `/board/${response.id}`;
+                            }
+                        })
+                    } else {
+                        alert('모든 항목을 다 채워 주세요');
+                    }
+                })
+            }
+
+            let putButton = document.getElementById('put-btn');
+            if (putButton) {
+                putButton.addEventListener("click", function() {
+                    let title = document.getElementById('title-form').value.trim();
+                    let content = document.getElementById('content-form').value.trim();
+                    let typeForm = document.getElementById('type-form');
+                    let type = typeForm.options[typeForm.selectedIndex].value.trim()
+
+                    const data = JSON.stringify({
+                        title: title,
+                        content: content,
+                        type: type
+                    })
+
+                    const p = {
+                        method: "PUT",
+                        headers: {
+                            "Content-type":"application/json"
+                        },
+                        body: data
+                    }
+
+                    if (title && content && type) {
+                        fetch(`/apis/putBoard/${putButton.value}`, p)
+                        .then(response => response.json())
+                        .then(response => {
+                            alert(response.message)
+                            if (response.success) {
+                                location.href = `/board/${putButton.value}`;
+                            }
+                        })
+                    } else {
+                        alert('모든 항목을 다 채워 주세요');
+                    }
+                })
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+	<title>SKKU TODO</title>
+	<style>
+		.container {
+			width: 640px;
+		}
+	</style>
+</head>
+<body>
+    <div class="container" style="background-color:#e9e9e9; border-radius: 15px;">
+        <div class="d-flex align-items-center mb-2" style="justify-content: center; margin-top:50px;padding-top:50px;"><h3>회 원 가 입</h3></div>
+        <div class="d-flex align-items-center mb-2 mt-2">
+			<input type="text" class="form-control" id="name" placeholder="이름을 입력하세요.">
+		</div>
+        <div class="d-flex align-items-center mb-2 mt-2">
+			<input type="text" class="form-control" id="id" placeholder="아이디를 입력하세요." oninput="handleOnInput(this)">
+		</div>
+        <div class="d-flex align-items-center mb-2 mt-2">
+			<input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요.">
+		</div>
+        <div class="d-flex align-items-center mt-2" style="margin-bottom:20px;">
+			<input type="text" class="form-control" id="nickname" placeholder="닉네임을 입력하세요.">
+		</div>
+        <div class="d-flex align-items-center mt-2" style="padding-left:10px;">
+			<h4 style="font-size:15px;">생일을 선택해주세요.</h4>
+		</div>
+        <div class="d-flex align-items-center mb-2 mt-2">
+            <input type="date" id="birthday" class="form-control" value="2000-01-01" placeholder="생일"/>
+        </div>
+        <div class="d-flex align-items-center mb-2 mt-2">
+            <input type="checkbox" name="isStudent" id="isStudent" value=2 style="margin-left:10px;"onclick="checkstudent()">
+                    <label for="isStudent" style="margin-left:10px;">대학생이라면 체크하세요.</label><br><br>
+        </div>
+        <div class="d-flex align-items-center mb-2" style="margin-top:15px; margin-left:10px;">
+            <h4 style="font-size:15px;">대학생이 아니라면 아래는 빈칸으로 제출하세요.</h4>
+        </div>
+        <div class="d-flex align-items-center mb-2 mt-2">
+            <input type="text" class="form-control" name="univ" id="univ" placeholder="대학교를 입력해주세요.">
+        </div>
+        <div class="d-flex align-items-center mb-2 mt-2" style="padding-bottom:10px;">
+            <input type="text" class="form-control" name="major" id="major" placeholder="전공을 입력해주세요.">
+        </div>
+        <div class="d-flex align-items-center mb-2 mt-2" style="justify-content: center; padding-bottom:50px;">
+            <button class="btn btn-primary" onclick="submitlogin()" style="width: 80px;height: 40px;border-style: none;border-radius: 5px;font-size:20px;">
+				완료</button>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+    <script>
+ let idcheck1=false;
+
+    function checkstudent(){
+        const checkstudent=document.getElementById("isStudent");
+        check=checkstudent.checked;
+        if(check==true){
+            document.getElementById("isStudent").value=1;
+        }
+        else{
+            document.getElementById("isStudent").value=2;
+        }
+    }
+
+    function idcheck(){
+        let id1=document.getElementById("id");
+        const data1 = JSON.stringify({id:id1.value})
+        const p={
+            method:"POST",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body:data1
+        }
+        fetch('/apis/checkId',p)
+            .then((response)=>{
+                return response.json()
+            })
+            .then((data)=>{
+                if(data.success==true){
+                    alert(data.message);
+                    idcheck1=true;
+                }
+                else{
+                    alert(data.message);
+                    idcheck1=false;
+                }
+            })
+    }
+    let nickcheck1=false;
+    function nickcheck(){
+        let nick1=document.getElementById("nickname");
+        const data1 = JSON.stringify({nickname:nick1.value})
+        const p={
+            method:"POST",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body:data1
+        }
+        fetch('/apis/checkNickname',p)
+            .then((response)=>{
+                return response.json()
+            })
+            .then((data)=>{
+                if(data.success==true){
+                    alert(data.message);
+                    nickcheck1=true;
+                }
+                else{
+                    alert(data.message);
+                    nickcheck1=false;
+                }
+            })
+    }
+
+    const title = document.getElementById("id");
+    title.addEventListener("focusout", () => {
+        if (title.value) idcheck()
+        else alert("아이디를 입력해 주세요.")
+    });
+    const title1 = document.getElementById("nickname");
+    title1.addEventListener("focusout", () => {
+        if (title1.value) nickcheck()
+        else alert("닉네임을 입력해 주세요.")
+    });
+    let name2=document.getElementById("name");
+    let birthday2=document.getElementById("birthday");
+    let password2=document.getElementById("password");
+    let checkname=true;
+    let checkbirth=true;
+    let checkpass=true;
+
+    function submitlogin(){
+        let id1=document.getElementById("id");
+        let name1=document.getElementById("name");
+        let birthday1=document.getElementById("birthday");
+        let nickname1=document.getElementById("nickname");
+        let password1=document.getElementById("password");
+        let isStudent1=document.getElementById("isStudent");
+        let univ1=document.getElementById("univ");
+        let major1=document.getElementById("major");
+        if(name1.value===""){
+            checkname=false;
+            alert("이름을 입력해주세요.")
+        }
+        else if(birthday1.value===""){
+            checkbirth=false;
+            alert("생일을 입력해주세요.")
+        }
+        else if(password1.value===""){
+            checkpass=false;
+            alert("비밀번호를 입력해주세요.")
+        }
+        else if(idcheck1===false){
+            alert("아이디가 중복되었습니다.")
+        }
+        else if(nickcheck1===false){
+            alert("닉네임이 중복되었습니다.")
+        }
+        const data1 = JSON.stringify({
+            id:id1.value,
+            name:name1.value,
+            birthday:birthday1.value,
+            nickname:nickname1.value,
+            password:password1.value,
+            isStudent:isStudent1.value,
+            univ:univ1.value,
+            major:major1.value
+        })
+        const p={
+            method:"POST",
+            headers:{
+                "Content-type":"application/json"
+            },
+            body:data1
+        }
+        if((idcheck1===true)&&(nickcheck1===true)&&(checkname===true)&&(checkbirth===true)&&(checkpass===true)){
+            fetch('/apis/register',p)
+                .then((response)=>{
+                    return response.json()
+                })
+                .then((data)=>{
+                    alert(data.message);
+                    location.href="/login"
+                })
+        }
+    }
+
+    function handleOnInput(e)  {
+        e.value = e.value.replace(/[^A-Za-z0-9]/ig, '')
+    }
+  </script>
+
+</body>
+
+</html>
